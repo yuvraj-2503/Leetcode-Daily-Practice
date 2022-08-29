@@ -10,23 +10,25 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        ListNode tmp= head;
+        // ListNode tmp= head;
         
-        int n = 0;
-        while(tmp != null){
-            tmp = tmp.next;
-            n++;
-        }
+//         int n = 0;
+//         while(tmp != null){
+//             tmp = tmp.next;
+//             n++;
+//         }
         
-        int k = (int)Math.ceil(n/2);
-        int i=1;
-        tmp = head;
-        while(i<=k){
-            i++;
-            tmp = tmp.next;
-        }
+        // int k = (int)Math.ceil(n/2);
+        // int i=1;
+        // tmp = head;
+        // while(i<=k){
+        //     i++;
+        //     tmp = tmp.next;
+        // }
         
-        ListNode head2 = reverseList(tmp);
+        ListNode middle = middleOfLinkedList(head); 
+        
+        ListNode head2 = reverseList(middle);
         while(head != null && head2 != null){
             
             if(head.val != head2.val) return false;
@@ -38,6 +40,20 @@ class Solution {
         return true;
         
         
+    }
+    
+    
+    public ListNode middleOfLinkedList(ListNode head){
+        ListNode hare = head;
+        ListNode turtle = head;
+        
+        while(hare.next != null && hare.next.next != null){
+            hare = hare.next.next;
+            
+            turtle = turtle.next;
+        }
+        
+        return turtle.next;
     }
     
     
