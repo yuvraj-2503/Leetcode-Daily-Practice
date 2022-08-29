@@ -20,7 +20,7 @@ class Solution {
         if(n>sz){
             return head;
         }
-        if(sz == 1){
+        if(sz <= 1){
             return null;
         }
         
