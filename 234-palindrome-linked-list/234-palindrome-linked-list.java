@@ -1,46 +1,54 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
-
     public boolean isPalindrome(ListNode head) {
-        if(head == null || head.next == null) return true;
+        ListNode tmp= head;
         
-        ListNode[] pointers = getPointers(head);
-        ListNode slow = pointers[0], fast = pointers[1];
-        
-        //if list is even, fast.next will not point to null.
-        if(fast.next != null) slow = slow.next;
-        
-        //Now reverse the second half and start comparing each value.
-        slow = reverse(slow, null);
-        
-        return compareList(head, slow);
-    }
-    
-    private ListNode[] getPointers(ListNode head){
-        //TURTLE HARE METHOD
-        ListNode slow = head, fast = head, temp = head;
-        while(fast.next != null && fast.next.next != null){
-            slow = slow.next;
-            fast = fast.next.next;
+        int n = 0;
+        while(tmp != null){
+            tmp = tmp.next;
+            n++;
         }
-        return new ListNode[]{slow, fast};
-    }
-    
-    private boolean compareList(ListNode head1, ListNode head2){
         
-        while(head1 != null && head2 != null){
-            if(head1.val != head2.val) return false;
-            head1 = head1.next;
+        int k = (int)Math.ceil(n/2);
+        int i=1;
+        tmp = head;
+        while(i<=k){
+            i++;
+            tmp = tmp.next;
+        }
+        
+        ListNode head2 = reverseList(tmp);
+        while(head != null && head2 != null){
+            
+            if(head.val != head2.val) return false;
+            
+            head = head.next;
             head2 = head2.next;
         }
         
         return true;
-    }
-
-    private ListNode reverse(ListNode node, ListNode prev){
-        if(node == null) return prev;
-        ListNode next = node.next;
-        node.next = prev;
-        return prev = reverse(next, node);
+        
+        
     }
     
+    
+    public ListNode reverseList(ListNode head){
+        if(head == null || head.next == null){
+            return head;
+        }
+
+        ListNode newHead = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
 }
