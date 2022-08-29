@@ -44,6 +44,10 @@ class Solution {
     
     
     public ListNode middleOfLinkedList(ListNode head){
+        
+        if(head == null){
+            return null;
+        }
         ListNode hare = head;
         ListNode turtle = head;
         
