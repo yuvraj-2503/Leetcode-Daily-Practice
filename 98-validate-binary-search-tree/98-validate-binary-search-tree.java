@@ -19,7 +19,7 @@ class Solution {
         
         inorder(root, arr1);
         
-        boolean f= true;
+        // boolean f= true;
         for(int i=0; i<arr1.size()-1; i++){
             if(arr1.get(i)>= arr1.get(i+1)){
                 return false;
